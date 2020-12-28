@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver-for-devlopement.sh'
+                sh './jenkins/scripts/deliver-for-development.sh'
                 input message: 'Finished using website?(Click "Process" to continue)'
                 sh './jenkins/scripts/kill.sh'
             }
