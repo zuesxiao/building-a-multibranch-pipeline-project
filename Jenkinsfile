@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:14-alpine'
-            args '-p 3000:3000'
+            args '-p 23000:3000'
         }
     }
     environment {
@@ -17,6 +17,13 @@ pipeline {
         stage('Test') {
             steps {
                 sh './jenkins/scripts/test.sh'
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh './jenkins/scripts/deliver-for-devlopement.sh'
+                input message: 'Finished using website?(Click "Process" to continue)'
+                sh './jenkins/scripts/kill.sh'
             }
         }
     }
